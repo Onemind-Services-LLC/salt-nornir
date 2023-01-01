@@ -529,7 +529,7 @@ def init(opts, loader=None, init_queues=True):
         {
             "plugin": "DictInventory",
             "options": {
-                "hosts": opts["pillar"]["hosts"],
+                "hosts": opts["pillar"].get("hosts", {}),
                 "groups": opts["pillar"].get("groups", {}),
                 "defaults": opts["pillar"].get("defaults", {}),
             },

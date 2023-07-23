@@ -421,8 +421,8 @@ optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-testing = ["pytest-timeout (>=2.1)", "pytest-cov (>=3)", "pytest (>=7.1.2)", "coverage (>=6.4.2)", "covdefaults (>=2.2)"]
-docs = ["sphinx-autodoc-typehints (>=1.19.1)", "sphinx (>=5.1.1)", "furo (>=2022.6.21)"]
+docs = ["furo (>=2022.6.21)", "sphinx (>=5.1.1)", "sphinx-autodoc-typehints (>=1.19.1)"]
+testing = ["covdefaults (>=2.2)", "coverage (>=6.4.2)", "pytest (>=7.1.2)", "pytest-cov (>=3)", "pytest-timeout (>=2.1)"]
 
 [[package]]
 name = "flake8"
@@ -1058,17 +1058,17 @@ nornir = "3.3.0"
 pydantic = "1.9.1"
 
 [package.extras]
-docs = ["sphinxcontrib-spelling (==7.2.1)", "sphinxcontrib-serializinghtml (==1.1.5)", "sphinxcontrib-qthelp (==1.0.2)", "sphinxcontrib-napoleon (==0.7)", "sphinxcontrib-jsmath (==1.0.1)", "sphinxcontrib-htmlhelp (==2.0.0)", "sphinxcontrib-devhelp (==1.0.1)", "sphinxcontrib-applehelp (==1.0.1)", "sphinx_rtd_theme (==1.0.0)", "Sphinx (==4.3.0)", "readthedocs-sphinx-search (==0.1.1)"]
-prodmin = ["jinja2 (==3.0.3)", "textfsm (==1.1.2)", "xmltodict (==0.13.0)", "ttp-templates (>=0.3.0,<0.4.0)", "ttp (>=0.9.0,<0.10.0)", "tabulate (==0.8.9)", "requests (==2.27.1)", "paramiko (==2.11.0)", "nornir-netmiko (==0.2.0)", "netmiko (==4.1.1)", "ncclient (==0.6.13)"]
-prodmax = ["jinja2 (==3.0.3)", "textfsm (==1.1.2)", "xmltodict (==0.13.0)", "ttp-templates (>=0.3.0,<0.4.0)", "ttp (>=0.9.0,<0.10.0)", "tabulate (==0.8.9)", "scrapli-netconf (==2022.1.30)", "scrapli-community (==2022.1.30)", "scrapli (==2022.1.30)", "requests (==2.27.1)", "puresnmp[crypto] (==2.0.0)", "pyyaml (==6.0)", "pygnmi (==0.8.4)", "pyats[full] (==22.1)", "paramiko (==2.11.0)", "ntc-templates (>=3.0.0,<4.0.0)", "nornir-scrapli (==2022.1.30)", "nornir-netmiko (==0.2.0)", "nornir-napalm (==0.3.0)", "netmiko (==4.1.1)", "ncclient (==0.6.13)", "napalm (==4.0.0)", "jmespath (==1.0.0)", "genie[full] (==22.1)", "cerberus (==1.3.4)"]
-dataprocessor = ["lxml (==4.8.0)", "xmltodict (==0.13.0)", "ttp-templates (>=0.3.0,<0.4.0)", "ttp (>=0.9.0,<0.10.0)", "tabulate (==0.8.9)", "pyyaml (==6.0)", "ntc-templates (>=3.0.0,<4.0.0)", "jmespath (==1.0.0)", "cerberus (==1.3.4)"]
-netconf = ["scrapli-netconf (==2022.1.30)", "ncclient (==0.6.13)"]
-scrapli = ["scrapli-community (==2022.1.30)", "scrapli (==2022.1.30)"]
-restconf = ["requests (==2.27.1)"]
+prodmax = ["cerberus (==1.3.4)", "genie[full] (==22.1)", "jmespath (==1.0.0)", "napalm (==4.0.0)", "ncclient (==0.6.13)", "netmiko (==4.1.1)", "nornir-napalm (==0.3.0)", "nornir-netmiko (==0.2.0)", "nornir-scrapli (==2022.1.30)", "ntc-templates (>=3.0.0,<4.0.0)", "paramiko (==2.11.0)", "pyats[full] (==22.1)", "pygnmi (==0.8.4)", "pyyaml (==6.0)", "puresnmp[crypto] (==2.0.0)", "requests (==2.27.1)", "scrapli (==2022.1.30)", "scrapli-community (==2022.1.30)", "scrapli-netconf (==2022.1.30)", "tabulate (==0.8.9)", "ttp (>=0.9.0,<0.10.0)", "ttp-templates (>=0.3.0,<0.4.0)", "xmltodict (==0.13.0)", "textfsm (==1.1.2)", "jinja2 (==3.0.3)"]
+dataprocessor = ["cerberus (==1.3.4)", "jmespath (==1.0.0)", "ntc-templates (>=3.0.0,<4.0.0)", "pyyaml (==6.0)", "tabulate (==0.8.9)", "ttp (>=0.9.0,<0.10.0)", "ttp-templates (>=0.3.0,<0.4.0)", "xmltodict (==0.13.0)", "lxml (==4.8.0)"]
+pyats = ["genie[full] (==22.1)", "pyats[full] (==22.1)"]
+napalm = ["napalm (==4.0.0)", "nornir-napalm (==0.3.0)"]
+prodmin = ["ncclient (==0.6.13)", "netmiko (==4.1.1)", "nornir-netmiko (==0.2.0)", "paramiko (==2.11.0)", "requests (==2.27.1)", "tabulate (==0.8.9)", "ttp (>=0.9.0,<0.10.0)", "ttp-templates (>=0.3.0,<0.4.0)", "xmltodict (==0.13.0)", "textfsm (==1.1.2)", "jinja2 (==3.0.3)"]
+netconf = ["ncclient (==0.6.13)", "scrapli-netconf (==2022.1.30)"]
+netmiko = ["netmiko (==4.1.1)", "nornir-netmiko (==0.2.0)"]
 gnmi = ["pygnmi (==0.8.4)"]
-pyats = ["pyats[full] (==22.1)", "genie[full] (==22.1)"]
-netmiko = ["nornir-netmiko (==0.2.0)", "netmiko (==4.1.1)"]
-napalm = ["nornir-napalm (==0.3.0)", "napalm (==4.0.0)"]
+restconf = ["requests (==2.27.1)"]
+scrapli = ["scrapli (==2022.1.30)", "scrapli-community (==2022.1.30)"]
+docs = ["readthedocs-sphinx-search (==0.1.1)", "Sphinx (==4.3.0)", "sphinx_rtd_theme (==1.0.0)", "sphinxcontrib-applehelp (==1.0.1)", "sphinxcontrib-devhelp (==1.0.1)", "sphinxcontrib-htmlhelp (==2.0.0)", "sphinxcontrib-jsmath (==1.0.1)", "sphinxcontrib-napoleon (==0.7)", "sphinxcontrib-qthelp (==1.0.2)", "sphinxcontrib-serializinghtml (==1.1.5)", "sphinxcontrib-spelling (==7.2.1)"]
 
 [[package]]
 name = "nornir-scrapli"
@@ -1266,11 +1266,11 @@ typing-extensions = {version = "*", markers = "python_version < \"3.8\""}
 x690 = ">=1.0,<2.0"
 
 [package.extras]
-rest = ["pack (<empty>)", "docutils (>=0.3)"]
-readthedocs = ["fabric"]
-pdf = ["rxp", "ReportLab (>=1.2)"]
-dev = ["asyncmock", "types-dataclasses", "sphinx-rtd-theme", "sphinx", "pytest-dependency", "pytest-cov", "pytest-asyncio", "pytest", "pylint", "mypy", "fabric (>=2.6.0)", "black (>=20.8b1)"]
 crypto = ["puresnmp-crypto"]
+dev = ["black (>=20.8b1)", "fabric (>=2.6.0)", "mypy", "pylint", "pytest", "pytest-asyncio", "pytest-cov", "pytest-dependency", "sphinx", "sphinx-rtd-theme", "types-dataclasses", "asyncmock"]
+pdf = ["ReportLab (>=1.2)", "rxp"]
+readthedocs = ["fabric"]
+rest = ["docutils (>=0.3)", "pack (<empty>)"]
 
 [[package]]
 name = "puresnmp-crypto"
@@ -1845,7 +1845,7 @@ python-versions = "*"
 
 [[package]]
 name = "pyyaml"
-version = "6.0"
+version = "6.0.1"
 description = "YAML parser and emitter for Python"
 category = "main"
 optional = false
@@ -2444,11 +2444,11 @@ importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 t61codec = ">=1.0.1,<2.0"
 
 [package.extras]
+dev = ["pygments", "black", "isort", "mypy", "pylint", "sphinx", "sphinx-rtd-theme", "types-dataclasses", "vulture"]
+pdf = ["ReportLab (>=1.2)", "rxp"]
+rest = ["docutils (>=0.3)", "pack (<empty>)"]
+test = ["pytest", "pytest-coverage"]
 webui = ["flask"]
-test = ["pytest-coverage", "pytest"]
-rest = ["pack (<empty>)", "docutils (>=0.3)"]
-pdf = ["rxp", "ReportLab (>=1.2)"]
-dev = ["vulture", "types-dataclasses", "sphinx-rtd-theme", "sphinx", "pylint", "mypy", "isort", "black", "pygments"]
 
 [[package]]
 name = "xlrd"
@@ -2546,7 +2546,7 @@ scrapli = ["scrapli", "scrapli-community"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4.0"
-content-hash = "08f2a51e15d00061c7ea717bb6f8afee5c0a876497e411db29ec70bd18361517"
+content-hash = "32ba4d5cfa03ac51eaf9ba077c4d151e3898106026b03e04e7574b8998e11de2"
 
 [metadata.files]
 aiofiles = [

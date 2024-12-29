@@ -49,7 +49,7 @@ jinja_env:
   
 ext_pillar:
   - salt_nornir_netbox:
-      url: 'http://192.168.1.130:8000'
+      url: 'http://192.168.1.13:8000'
       token: '0123456789abcdef0123456789abcdef01234567'
       use_minion_id_device: False
       use_minion_id_tag: False

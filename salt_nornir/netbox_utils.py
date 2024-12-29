@@ -835,7 +835,7 @@ def get_connections(
         queries = {
             "interface": {
                 "field": "interface_list",
-                "filters": {"device": hosts, "type__n": ["lag", "virtual"]},
+                "filters": {"device": hosts, "NOT":{"type": {"in_list": ["lag", "virtual"]}}},
                 "fields": interfaces_fields,
             },
             "consoleport": {
@@ -849,6 +849,7 @@ def get_connections(
                 "fields": console_server_ports_fields,
             },
         }
+
         # retrieve full list of devices interface with all cables
         all_ports = nb_graphql(queries=queries, params=params)
 
@@ -861,11 +862,11 @@ def get_connections(
                 if not cable:
                     continue
                 # skip ports that have no remote device connected
-                # that will ignore cases when port connectes to
+                # that will ignore cases when port connects to
                 # provider network via circuit as well
                 if not endpoints or not all(i for i in endpoints):
                     continue
-                # etract required parameters
+                # extract required parameters
                 device_name = port["device"]["name"]
                 port_name = port["name"]
                 link_peers = port["link_peers"]
@@ -873,10 +874,10 @@ def get_connections(
                 connections_dict[device_name][port_name] = {
                     "breakout": len(endpoints) > 1,
                     "cable": cable,
-                    "remote_device": endpoints[0]["device"]["name"],
+                    "remote_device": endpoints[0]["device"]["name"] if endpoints[0].get("device") else None,
                     "remote_interface": [i["name"] for i in endpoints]
                     if len(endpoints) > 1
-                    else endpoints[0]["name"],
+                    else endpoints[0]["name"] if endpoints[0].get("name") else None,
                     "remote_termination_type": endpoints[0]["__typename"]
                     .replace("Type", "")
                     .lower(),

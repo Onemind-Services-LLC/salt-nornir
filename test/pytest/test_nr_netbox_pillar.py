@@ -24,7 +24,7 @@ if HAS_SALT:
     client = salt.client.LocalClient()
     opts = salt.config.client_config("/etc/salt/master")
     event = salt.utils.event.get_event(
-        "master", sock_dir=opts["sock_dir"], transport=opts["transport"], opts=opts
+        "master", sock_dir=opts["sock_dir"], opts=opts
     )
     
 # check if Netbox endpoint reachable
@@ -373,7 +373,8 @@ class TestProxyNRP1:
               host_add_netbox_data: salt_nornir_netbox_pillar_test
               use_hosts_filters: True
               hosts_filters: 
-                - name: "ceos1"
+                - name:
+                    exact: "ceos1"
                 
         this is to verify ceos1 has "salt_nornir_netbox_pillar_test" data
         key with netbox inventory data.
@@ -399,7 +400,8 @@ class TestProxyNRP1:
               host_add_netbox_data: salt_nornir_netbox_pillar_test
               use_hosts_filters: True
               hosts_filters: 
-                - name: "ceos1"
+                - name:
+                    exact: "ceos1"
                 
         combine with this master config:
         

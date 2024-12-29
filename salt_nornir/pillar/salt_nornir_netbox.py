@@ -98,8 +98,10 @@ defined in proxy minion pillar under ``salt_nornir_netbox_pillar`` key::
       token: '837494d786ff420c97af9cd76d3e7f1115a913b4'
       host_add_interfaces: "nb_interfaces"
       hosts_filters:
-        - name__ic: "ceos"
-        - location__nic: "south"
+        - name:
+            i_contains: "ceos"
+        - location:
+            i_contains: "south"
           tag: "mytag"
           role: "core"
       secrets:
@@ -149,7 +151,7 @@ Base Configuration Parameters
   ``host_add_connections`` value
 * ``host_primary_ip`` - default: ``None``, supported values: ``ip4``, ``ip6`` or ``None``;
   Control which primary IP to use as host's hostname
-* ``hosts_filters`` - default: N/A, example: ``"name__ic": "ceos1"``; List of dictionaries 
+* ``hosts_filters`` - default: N/A, example: ``"name": {"i_contains": "ceos1"}``; List of dictionaries
   where each dictionary contains filtering parameters to filter Netbox devices, Netbox 
   devices that matched, processed further and included into pillar data
 * ``secrets`` - Secrets Configuration Parameters indicating how to retrieve secrets values 
@@ -796,7 +798,7 @@ def _netbox_secrets_get_session_key(params, device_name):
         requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     with RUNTIME_VARS_LOCK:
         if "nb_secretstore_session_key" not in RUNTIME_VARS:
-            url = f"{params['url']}/api/plugins/secrets/get-session-key/"
+            url = f"{params['url']}/api/plugins/secrets/session-keys/"
             token = "Token " + params["token"]
             # read private key content from file
             key_file = params["secrets"]["plugins"]["netbox_secrets"]["private_key"]
@@ -1250,7 +1252,7 @@ def ext_pillar(minion_id, pillar, *args, **kwargs):
         except Exception as e:
             log.exception(
                 f"salt_nornir_netbox failed to query Netbox API while forming {minion_id} pillar data, "
-                f"Netbox URL '{params['url']}', token ends with '..{params['token'][-6:]}'"
+                f"Netbox URL '{params['url']}', token ends with '..{params['token'][-6:]}': {e}"
             )
             return ret
 

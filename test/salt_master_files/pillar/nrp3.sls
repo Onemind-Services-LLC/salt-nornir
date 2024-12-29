@@ -2074,9 +2074,12 @@ salt_nornir_netbox_pillar:
   host_add_interfaces_ip: True
   host_add_connections: True
   hosts_filters: 
-    - name__ic: "fceos5"
-    - name__ic: "fceos4"
-    - name__ic: "__not_exists__"
+    - name:
+        i_contains: "fceos5"
+    - name:
+        i_contains: "fceos4"
+    - name:
+        i_contains: "__not_exists__"
   secrets:
     resolve_secrets: True
     fetch_username: True

@@ -58,10 +58,10 @@ nr.diagram
 .. autofunction:: salt_nornir.runners.nornir_proxy_runner_module.diagram
 """
 # Import python libs
+import asyncio
 import logging
 import time
 import os
-import pprint
 import queue
 import copy
 import traceback
@@ -425,8 +425,14 @@ def _get_salt_nornir_event(stop_signal, tag, events_queue):
     :param tag: (str) tag pattern of events to listen for
     :param events_queue: (obj) queue.Queue object to enqueue captured events
     """
+    # Set up an asyncio event loop in the current thread
+    try:
+        asyncio.set_event_loop(asyncio.new_event_loop())
+    except RuntimeError:
+        pass  # Handle case where the loop already exists
+
     event_bus = salt.utils.event.get_event(
-        "master", sock_dir=opts["sock_dir"], transport=opts["transport"], opts=opts
+        "master", sock_dir=opts["sock_dir"], opts=opts
     )
     while not stop_signal.is_set():
         e = event_bus.get_event(

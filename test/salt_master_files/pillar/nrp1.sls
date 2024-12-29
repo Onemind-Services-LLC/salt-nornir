@@ -256,5 +256,6 @@ proxy:
 salt_nornir_netbox_pillar:
   host_add_netbox_data: salt_nornir_netbox_pillar_test
   hosts_filters:
-  - name: ceos1
+  - name:
+      exact: ceos1
   use_hosts_filters: true

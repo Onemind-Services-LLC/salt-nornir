@@ -18,7 +18,6 @@ COPY nornir_salt/ /tmp/nornir_salt/
 RUN pip install --no-cache-dir /tmp/nornir_salt/.[prodmaxmaster] --upgrade && \
     pip install --no-cache-dir /tmp/salt_nornir/.[prodmaxmaster] --upgrade
 
-RUN USE_STATIC_REQUIREMENTS=1 pip install --no-cache-dir salt==3006
+RUN USE_STATIC_REQUIREMENTS=1 pip install --no-cache-dir salt==3007.1
 
 CMD /tmp/master_start.sh
-# CMD salt-master -l debug

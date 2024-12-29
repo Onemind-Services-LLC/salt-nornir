@@ -22,7 +22,7 @@ if HAS_SALT:
     # initiate runner modules client to run 'salt-run xyz command' commands
     opts = salt.config.client_config("/etc/salt/master")
     event = salt.utils.event.get_event(
-        "master", sock_dir=opts["sock_dir"], transport=opts["transport"], opts=opts
+        "master", sock_dir=opts["sock_dir"], opts=opts
     )
     
     # initiate runner modules client to run 'salt "*" command' commands

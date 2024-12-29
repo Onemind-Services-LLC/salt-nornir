@@ -12,8 +12,9 @@ jinja_env:
   
 salt_nornir_netbox_pillar:
   use_hosts_filters: true
-  url: 'https://192.168.75.130:443'
+  url: 'https://192.168.1.13:443'
   ssl_verify: False
   host_add_netbox_data: True
   hosts_filters:
-  - name: iosxr1
+  - name:
+      exact: iosxr1

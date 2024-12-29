@@ -2921,7 +2921,7 @@ def nornir_fun(fun, *args, **kwargs):
             **kwargs,
         )
     elif fun == "clear_dcache":
-        # make sure to always cleare dcache for all workers
+        # make sure to always clear dcache for all workers
         kwargs["worker"] = "all"
         return task(
             plugin="clear_dcache",

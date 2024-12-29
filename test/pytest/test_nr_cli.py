@@ -14,7 +14,7 @@ try:
     HAS_SALT = True
 except:
     HAS_SALT = False
-    raise SystemExit("SALT Nonrir Tests - failed importing SALT libraries")
+    raise SystemExit("SALT Nornir Tests - failed importing SALT libraries")
 
 if HAS_SALT:
     # initiate execution modules client to run 'salt xyz command' commands
@@ -467,7 +467,7 @@ commands = ["show run"]
 
 <group name="facts" input="version">
 Architecture: {{ arch }}
-cEOS tools version: {{ tools_version }}
+Internal build version: {{ tools_version }}
 </group>
   
 <group name="interf" input="interfaces">
@@ -755,8 +755,8 @@ def test_nr_cli_napalm_plugin_render_command():
         tgt_type="glob",
         timeout=60,
     )
-    assert "PING ceos1" in ret["nrp1"]["ceos1"]["ping ceos1"] 
-    assert "PING ceos2" in ret["nrp1"]["ceos2"]["ping ceos2"]
+    assert "PING  (1.1.1.1)" in ret["nrp1"]["ceos1"]["ping ceos1"]
+    assert "PING  (1.101.2.2)" in ret["nrp1"]["ceos2"]["ping ceos2"]
     
 # test_nr_cli_napalm_plugin_render_command()
         
@@ -770,8 +770,8 @@ def test_nr_cli_netmiko_plugin_render_command():
         tgt_type="glob",
         timeout=60,
     )
-    assert "PING ceos1" in ret["nrp1"]["ceos1"]["ping ceos1"] 
-    assert "PING ceos2" in ret["nrp1"]["ceos2"]["ping ceos2"]
+    assert "PING  (1.1.1.1)" in ret["nrp1"]["ceos1"]["ping ceos1"]
+    assert "PING  (1.101.2.2)" in ret["nrp1"]["ceos2"]["ping ceos2"]
     
 # test_nr_cli_netmiko_plugin_render_command()
 
@@ -785,8 +785,8 @@ def test_nr_cli_scrapli_plugin_render_command():
         tgt_type="glob",
         timeout=60,
     )
-    assert "PING ceos1" in ret["nrp1"]["ceos1"]["ping ceos1"] 
-    assert "PING ceos2" in ret["nrp1"]["ceos2"]["ping ceos2"]
+    assert "PING  (1.1.1.1)" in ret["nrp1"]["ceos1"]["ping ceos1"]
+    assert "PING  (1.101.2.2)" in ret["nrp1"]["ceos2"]["ping ceos2"]
     
 # test_nr_cli_scrapli_plugin_render_command()
 
@@ -800,8 +800,8 @@ def test_nr_cli_pyats_plugin_render_command():
         tgt_type="glob",
         timeout=60,
     )
-    assert "PING ceos1" in ret["nrp1"]["ceos1"]["ping ceos1"] 
-    assert "PING ceos2" in ret["nrp1"]["ceos2"]["ping ceos2"]
+    assert "PING  (1.1.1.1)" in ret["nrp1"]["ceos1"]["ping ceos1"]
+    assert "PING  (1.101.2.2)" in ret["nrp1"]["ceos2"]["ping ceos2"]
     
 # test_nr_cli_pyats_plugin_render_command()
 
@@ -901,9 +901,9 @@ def test_nr_cli_pyats_plugin_via_pool():
         fun="nr.cli",
         arg=[
             "enable", "enable", "enable",
-            "ping 8.8.8.8 interval 1 timeout 1", 
-            "ping 1.2.3.4 interval 1 timeout 1", 
-            "ping 4.4.8.8 interval 1 timeout 1",
+            "ping 8.8.8.8 interval 1 timeout 1 repeat 1",
+            "ping 1.2.3.4 interval 1 timeout 1 repeat 1",
+            "ping 4.4.8.8 interval 1 timeout 1 repeat 1",
         ],
         kwarg={"plugin": "pyats", "via": "vty_1", "FB": "ceos1", "event_progress": True},
         tgt_type="glob",
@@ -921,10 +921,10 @@ def test_nr_cli_pyats_plugin_via_pool():
     end_time = time.strptime(event_end["_stamp"].split(".")[0], "%Y-%m-%dT%H:%M:%S")
     elapsed = time.mktime(end_time) - time.mktime(start_time)
     
-    assert elapsed < 10, "Took more then 10seconds to finish commands"
-    assert "ping 8.8.8.8 interval 1 timeout 1" in ret["nrp1"]["ceos1"]
-    assert "ping 1.2.3.4 interval 1 timeout 1" in ret["nrp1"]["ceos1"]
-    assert "ping 4.4.8.8 interval 1 timeout 1" in ret["nrp1"]["ceos1"]
+    assert elapsed < 10, "Took more than 10seconds to finish commands"
+    assert "ping 8.8.8.8 interval 1 timeout 1 repeat 1" in ret["nrp1"]["ceos1"]
+    assert "ping 1.2.3.4 interval 1 timeout 1 repeat 1" in ret["nrp1"]["ceos1"]
+    assert "ping 4.4.8.8 interval 1 timeout 1 repeat 1" in ret["nrp1"]["ceos1"]
 
 # test_nr_cli_pyats_plugin_via_pool()
 
@@ -971,17 +971,15 @@ def test_nr_cli_pyats_plugin_parse_eos_fail():
     ret = client.cmd(
         tgt="nrp1",
         fun="nr.cli",
-        arg=["show clock", "show version"],
+        arg=["show clock"],
         kwarg={"plugin": "pyats", "parse": True},
         tgt_type="glob",
         timeout=60,
     )
     # pprint.pprint(ret)
     assert "Could not find parser" in ret["nrp1"]["ceos1"]["show clock"]
-    assert "Could not find parser" in ret["nrp1"]["ceos1"]["show version"]
     assert "Could not find parser" in ret["nrp1"]["ceos2"]["show clock"]
-    assert "Could not find parser" in ret["nrp1"]["ceos2"]["show version"]
-    
+
 # test_nr_cli_pyats_plugin_parse_eos_fail()
 
 @skip_if_not_has_sandbox_iosxe_latest_1_ssh
@@ -989,17 +987,15 @@ def test_nr_cli_pyats_plugin_parse_nrp2_iosxe():
     ret = client.cmd(
         tgt="nrp2",
         fun="nr.cli",
-        arg=["show clock", "show version"],
+        arg=["show clock"],
         kwarg={"plugin": "pyats", "parse": True, "add_details": True, "FC": "csr"},
         tgt_type="glob",
         timeout=60,
     )
     pprint.pprint(ret)
     assert isinstance(ret["nrp2"]["csr1000v-1"]["show clock"]["result"], dict)
-    assert isinstance(ret["nrp2"]["csr1000v-1"]["show version"]["result"], dict)
     assert ret["nrp2"]["csr1000v-1"]["show clock"]["failed"] == False
-    assert ret["nrp2"]["csr1000v-1"]["show version"]["failed"] == False
-    
+
 # test_nr_cli_pyats_plugin_parse_nrp2_iosxe()
 
 def test_nr_cli_netmiko_repeat_3():

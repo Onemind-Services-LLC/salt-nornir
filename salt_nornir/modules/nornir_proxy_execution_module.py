@@ -814,7 +814,7 @@ from within TTP template input tags using ``commands`` argument. For example::
     </input>
 
     <group name="facts" input="version">
-    cEOS tools version: {{ tools_version }}
+    Internal build version: {{ tools_version }}
     Kernel version: {{ kernel_version }}
     Total memory: {{ total_memory}} kB
     Free memory: {{ total_memory}} kB

@@ -13,7 +13,7 @@ try:
     HAS_SALT = True
 except:
     HAS_SALT = False
-    raise SystemExit("SALT Nonrir Tests - failed importing SALT libraries")
+    raise SystemExit("SALT Nornir Tests - failed importing SALT libraries")
 
 try:
     import requests

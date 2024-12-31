@@ -43,7 +43,7 @@ paramiko = { version = "3.5.0", optional = true }
 pyats = { version = "24.11", markers = "sys_platform != 'win32'", optional = true, extras = ['full'] }
 pygnmi = { version = "0.8.14", optional = true }
 pynetbox = { version = "7.4.1", optional = true }
-pyyaml = { version = "6.0.2", optional = true }
+pyyaml = { version = "6.0.1", optional = true }
 puresnmp = { version = "2.0.1", optional = true, extras = ['crypto'] }
 requests = { version = "2.32.3", optional = true }
 scrapli = { version = "2024.7.30.post1", optional = true }
